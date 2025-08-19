@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>📈 TradeTrack Pro</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --text: #f1f5f9;
+      --card: #334155;
+      --header: #1e293b;
+      --accent: #38bdf8;
+    }
+    body.light {
+      --bg: #f8fafc;
+      --text: #0f172a;
+      --card: #e2e8f0;
+      --header: #cbd5e1;
+      --accent: #2563eb;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+      transition: background 0.4s, color 0.4s;
+    }
+    header {
+      background: var(--header);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+    header h1 {
+      color: var(--accent);
+      margin: 0;
+    }
+    nav a {
+      color: var(--text);
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      color: var(--accent);
+    }
+    .section {
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .intro {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .intro h2 {
+      color: var(--accent);
+      margin-bottom: 15px;
+    }
+    .container {
+      background: var(--header);
+      padding: 20px 40px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      text-align: center;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .card {
+      background: var(--card);
+      padding: 15px;
+      border-radius: 12px;
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+    }
+    .price {
+      font-size: 1.5rem;
+      margin-top: 8px;
+    }
+    .flash-green { color: #22c55e; }
+    .flash-red { color: #ef4444; }
+
+    .charts {
+      margin-top: 50px;
+    }
+    .chart-container {
+      margin-bottom: 40px;
+      background: var(--header);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    }
+    .chart-container h3 {
+      margin-bottom: 15px;
+      color: var(--accent);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      max-width: 500px;
+      margin: auto;
+    }
+    form input, form textarea, form button {
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+    }
+    form button {
+      background: var(--accent);
+      color: var(--bg);
+      font-weight: bold;
+      cursor: pointer;
+    }
+    form button:hover {
+      opacity: 0.9;
+    }
+
+    /* Toggle Button (floating popup style) */
+    #theme-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      transition: background 0.3s, transform 0.2s;
+    }
+    #theme-toggle:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📈 TradeTrack Pro</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#prices">Prices</a>
+      <a href="#charts">Charts</a>
+      <a href="#contact">Contact Us</a>
+    </nav>
+  </header>
+
+  <section id="home" class="section intro">
+    <h2>Welcome to TradeTrack Pro 🚀</h2>
+    <p>Your all-in-one crypto tracking dashboard. Monitor live prices, explore interactive charts, and stay ahead in your trading journey with ease and precision.</p>
+  </section>
+
+  <section id="prices" class="section">
+    <div class="container">
+      <h2>🔥 Live Prices</h2>
+      <div class="grid">
+        <div class="card"><h2>Bitcoin (BTC)</h2><div id="bitcoin" class="price">Loading...</div></div>
+        <div class="card"><h2>Ethereum (ETH)</h2><div id="ethereum" class="price">Loading...</div></div>
+        <div class="card"><h2>Dogecoin (DOGE)</h2><div id="dogecoin" class="price">Loading...</div></div>
+        <div class="card"><h2>Cardano (ADA)</h2><div id="cardano" class="price">Loading...</div></div>
+        <div class="card"><h2>Solana (SOL)</h2><div id="solana" class="price">Loading...</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="charts" class="section charts">
+    <h2 style="text-align:center;">📊 Interactive Charts</h2>
+    <div class="chart-container"><h3>Bitcoin (BTC)</h3><div id="btc-chart"></div></div>
+    <div class="chart-container"><h3>Ethereum (ETH)</h3><div id="eth-chart"></div></div>
+    <div class="chart-container"><h3>Dogecoin (DOGE)</h3><div id="doge-chart"></div></div>
+    <div class="chart-container"><h3>Cardano (ADA)</h3><div id="ada-chart"></div></div>
+    <div class="chart-container"><h3>Solana (SOL)</h3><div id="sol-chart"></div></div>
+  </section>
+
+  <section id="contact" class="section">
+    <h2 style="text-align:center;">📬 Contact Us</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Toggle Button -->
+  <button id="theme-toggle">🌙</button>
+
+  <script>
+    const lastPrices = {};
+
+    async function fetchPrices() {
+      try {
+        const res = await fetch("/api/prices");
+        const data = await res.json();
+        for (const [coin, details] of Object.entries(data)) {
+          const el = document.getElementById(coin);
+          if (!el) continue;
+          const newPrice = details.usd;
+          const oldPrice = lastPrices[coin];
+          if (oldPrice) {
+            if (newPrice > oldPrice) {
+              el.classList.add("flash-green");
+              setTimeout(() => el.classList.remove("flash-green"), 600);
+            } else if (newPrice < oldPrice) {
+              el.classList.add("flash-red");
+              setTimeout(() => el.classList.remove("flash-red"), 600);
+            }
+          }
+          el.textContent = `$${newPrice}`;
+          lastPrices[coin] = newPrice;
+        }
+      } catch (err) {
+        console.error("Error fetching prices:", err);
+      }
+    }
+
+    fetchPrices();
+    setInterval(fetchPrices, 5000);
+
+    // Dark/Light mode toggle
+    const toggleBtn = document.getElementById("theme-toggle");
+    toggleBtn.addEventListener("click", () => {
+      document.body.classList.toggle("light");
+      toggleBtn.textContent = document.body.classList.contains("light") ? "🌞" : "🌙";
+    });
+  </script>
+
+  <!-- TradingView Script -->
+  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+  <script>
+    function createChart(containerId, symbol) {
+      new TradingView.widget({
+        "width": "100%",
+        "height": 500,
+        "symbol": symbol,
+        "interval": "60",
+        "timezone": "Etc/UTC",
+        "theme": document.body.classList.contains("light") ? "light" : "dark",
+        "style": "1",
+        "locale": "en",
+        "toolbar_bg": "#1e293b",
+        "hide_top_toolbar": false,
+        "hide_legend": false,
+        "allow_symbol_change": false,
+        "container_id": containerId
+      });
+    }
+    createChart("btc-chart", "BINANCE:BTCUSDT");
+    createChart("eth-chart", "BINANCE:ETHUSDT");
+    createChart("doge-chart", "BINANCE:DOGEUSDT");
+    createChart("ada-chart", "BINANCE:ADAUSDT");
+    createChart("sol-chart", "BINANCE:SOLUSDT");
+  </script>
+</body>
+</html>
